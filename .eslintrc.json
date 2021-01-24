@@ -1,0 +1,30 @@
+{
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "eqeqeq": "warn",
+        "no-throw-literal": "warn",
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": "warn",
+        "indent": [
+            "error",
+            2
+        ],
+        "space-before-blocks": "error",
+        "keyword-spacing": "warn",
+        "object-curly-spacing": [
+            "warn",
+            "always"
+        ]
+    }
+}
