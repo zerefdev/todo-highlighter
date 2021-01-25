@@ -7,6 +7,7 @@
 		"vscode": "^1.52.0"
 	},
 	"categories": [
+		"Snippets",
 		"Other"
 	],
 	"keywords": [
@@ -47,7 +48,7 @@
 		],
 		"snippets": [
 			{
-				"path": "./src/todo.code-snippets"
+				"path": "src/todo.code-snippets"
 			}
 		],
 		"viewsContainers": {
@@ -85,6 +86,7 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
+		"precompile": "rm -rf out",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"pretest": "npm run compile && npm run lint",

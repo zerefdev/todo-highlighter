@@ -77,4 +77,4 @@ class Todo extends TreeItem {
 
 function pattern(glob: string[]): GlobPattern {
   return '{' + glob.join(',') + '}';
-} 
+}

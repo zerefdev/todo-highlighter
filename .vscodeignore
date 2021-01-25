@@ -10,3 +10,5 @@ vsc-extension-quickstart.md
 **/*.map
 **/*.ts
 !src/media/icon.png
+!src/media/icon.svg
+!src/todo.code-snippets
