@@ -1,7 +1,7 @@
 {
 	"name": "simple-todo-highlighter",
 	"displayName": "Simple Todo Highlighter",
-	"description": "Highlights Todo Keyword",
+	"description": "Highlights Todo keyword and lists all todos in the tree view.",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.52.0"
@@ -9,14 +9,77 @@
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"todo",
+		"todo snippet",
+		"todo highlight"
+	],
+	"license": "MIT",
+	"publisher": "zerefdev",
+	"icon": "src/media/icon.png",
+	"homepage": "https://github.com/zerefdev/simple-todo-highlighter/blob/main/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/zerefdev/simple-todo-highlighter.git"
+	},
+	"bugs": {
+		"url": "https://github.com/zerefdev/simple-todo-highlighter/issues",
+		"email": "contact@zeref.dev"
+	},
 	"activationEvents": [
 		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"commands": [
+			{
+				"command": "simpleTodoHighlighter.refreshList",
+				"category": "Simple Todo Highlighter",
+				"title": "Refresh Todo List",
+				"icon": "$(refresh)"
+			},
+			{
+				"command": "simpleTodoHighlighter.openFile",
+				"category": "Simple Todo Highlighter",
+				"title": "Open File",
+				"icon": "$(file)"
+			}
+		],
 		"snippets": [
 			{
 				"path": "./src/todo.code-snippets"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "simpleTodoHighlighter",
+					"title": "Simple Todo Highlighter",
+					"icon": "src/media/icon.svg"
+				}
+			]
+		},
+		"views": {
+			"simpleTodoHighlighter": [
+				{
+					"id": "todo-list",
+					"name": "Todo List"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "simpleTodoHighlighter.refreshList",
+					"when": "view == todo-list",
+					"group": "navigation"
+				}
+			]
+		},
+		"viewsWelcome": [
+			{
+				"view": "todo-list",
+				"contents": "You have no todos yet."
 			}
 		]
 	},
@@ -30,13 +93,11 @@
 	"devDependencies": {
 		"@types/vscode": "^1.52.0",
 		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.0.4",
 		"@types/node": "^12.11.7",
 		"eslint": "^7.15.0",
 		"@typescript-eslint/eslint-plugin": "^4.9.0",
 		"@typescript-eslint/parser": "^4.9.0",
 		"glob": "^7.1.6",
-		"mocha": "^8.1.3",
 		"typescript": "^4.1.2",
 		"vscode-test": "^1.4.1"
 	}

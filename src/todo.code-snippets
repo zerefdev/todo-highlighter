@@ -1,8 +1,27 @@
 {
   "Add Todo": {
+    "scope": "javascript, typescript, javascriptreact, typescriptreact, vue, csharp, cpp, php",
     "prefix": "todo",
     "body": [
       "// TODO: $0",
+    ],
+    "description": "Add Todo"
+  },
+  "Add CSS Todo": {
+    "scope": "css, scss, sass",
+    "prefix": "todo",
+    "body": [
+      "/*",
+      "  TODO: $0",
+      "*/"
+    ],
+    "description": "Add Todo"
+  },
+  "Add C Todo": {
+    "scope": "c, python",
+    "prefix": "todo",
+    "body": [
+      "# TODO: $0",
     ],
     "description": "Add Todo"
   }

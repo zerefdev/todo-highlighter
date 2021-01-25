@@ -1,1 +1,6 @@
-![preview](https://i.imgur.com/XKo9Wy3.gif)
+# Simple Todo Highlighter
+
+
+![preview](https://i.imgur.com/a1Eau0p.gif)
+
+![preview](https://i.imgur.com/kMJQOnT.gif)
