@@ -14,11 +14,22 @@ export const TODO = 'TODO:';
 export const REGEX = new RegExp(TODO, 'g');
 
 export const INCLUDE = [
-  '**/*'
+  '**/*.js',
+  '**/*.ts',
+  '**/*.jsx',
+  '**/*.tsx',
+  '**/*.html',
+  '**/*.vue',
+  '**/*.css',
+  '**/*.scss',
+  '**/*.sass',
+  '**/*.python',
+  '**/*.php'
 ];
 
 export const EXCLUDE = [
   '**/node_modules/**',
+  '**/bower_components/**',
   '**/dist/**',
   '**/out/**',
   '**/build/**',
