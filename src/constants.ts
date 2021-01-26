@@ -23,8 +23,11 @@ export const INCLUDE = [
   '**/*.css',
   '**/*.scss',
   '**/*.sass',
+  '**/*.less',
+  '**/*.styl',
   '**/*.python',
-  '**/*.php'
+  '**/*.php',
+  '**/*.md'
 ];
 
 export const EXCLUDE = [

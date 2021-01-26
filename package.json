@@ -1,8 +1,8 @@
 {
 	"name": "simple-todo-highlighter",
 	"displayName": "Simple Todo Highlighter",
-	"description": "Highlights Todo keyword and lists all todos in the tree view.",
-	"version": "0.0.1",
+	"description": "Highlights TODO keyword and lists all todos in the side bar.",
+	"version": "0.1.0",
 	"engines": {
 		"vscode": "^1.52.0"
 	},

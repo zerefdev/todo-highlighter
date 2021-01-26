@@ -8,7 +8,7 @@
     "description": "Add Todo"
   },
   "Add CSS Todo": {
-    "scope": "css, scss, sass",
+    "scope": "css, scss, sass, less, stylus",
     "prefix": "todo",
     "body": [
       "/*",
@@ -24,5 +24,15 @@
       "# TODO: $0",
     ],
     "description": "Add Todo"
-  }
+  },
+  "Add Html Todo": {
+    "scope": "html, markdown",
+    "prefix": "todo",
+    "body": [
+      "<!--",
+      "  TODO: $0",
+      "-->",
+    ],
+    "description": "Add Todo"
+  },
 }
