@@ -25,7 +25,7 @@ export const INCLUDE = [
   '**/*.sass',
   '**/*.less',
   '**/*.styl',
-  '**/*.python',
+  '**/*.py',
   '**/*.php',
   '**/*.md'
 ];
