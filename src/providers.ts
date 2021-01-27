@@ -55,8 +55,8 @@ export class TodoTreeListProvider implements TreeDataProvider<Todo> {
 
     // TODO: find a better way
     return arr1.sort(({ label: label1 }, { label: label2 }) => {
-      const l1 = (label1 as string).toLocaleLowerCase();
-      const l2 = (label2 as string).toLocaleLowerCase();
+      const l1 = label1.toLocaleLowerCase();
+      const l2 = label2.toLocaleLowerCase();
 
       if (l1 < l2) return -1;
 
@@ -72,10 +72,12 @@ export class TodoTreeListProvider implements TreeDataProvider<Todo> {
 }
 
 class Todo extends TreeItem {
+  label: string;
   children: Todo[] | undefined;
 
   constructor(label: string, children?: Todo[], path?: Uri, col?: number) {
     super(label, children ? TreeItemCollapsibleState.Expanded : TreeItemCollapsibleState.None);
+    this.label = label;
     this.children = children;
     this.iconPath = children ? new ThemeIcon('file') : undefined;
     this.resourceUri = children ? path : undefined;
