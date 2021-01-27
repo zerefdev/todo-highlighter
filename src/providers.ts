@@ -35,13 +35,17 @@ export class TodoTreeListProvider implements TreeDataProvider<Todo> {
           .replace(/\\/g, '/')
           .split('/').pop()
           ?? 'unknown';
+        let k = 1;
 
         for (let j = 0; j < doc.lineCount; j++) {
           const text = doc.lineAt(j).text;
 
           if (REGEX.test(text)) {
             const todoText = text.slice(text.indexOf(TODO) + TODO.length + 1, text.length);
-            if (todoText) arr2.push(new Todo(todoText, undefined, docUri, j));
+            if (todoText) {
+              arr2.push(new Todo(`${k}. ${todoText}`, undefined, docUri, j));
+              k++;
+            }
           }
         }
 
@@ -49,7 +53,17 @@ export class TodoTreeListProvider implements TreeDataProvider<Todo> {
       }
     }
 
-    return Promise.resolve(arr1);
+    // TODO: find a better way
+    return arr1.sort(({ label: label1 }, { label: label2 }) => {
+      const l1 = (label1 as string).toLocaleLowerCase();
+      const l2 = (label2 as string).toLocaleLowerCase();
+
+      if (l1 < l2) return -1;
+
+      if (l1 > l2) return 1;
+
+      return 0;
+    });
   }
 
   refresh(): void {
@@ -65,7 +79,7 @@ class Todo extends TreeItem {
     this.children = children;
     this.iconPath = children ? new ThemeIcon('file') : undefined;
     this.resourceUri = children ? path : undefined;
-    this.description = true;
+    this.description = !!children;
     this.command = !children ? {
       command: COMMANDS.OPEN_FILE,
       title: 'Open file',
@@ -73,7 +87,6 @@ class Todo extends TreeItem {
     } : undefined;
   }
 }
-
 
 function pattern(glob: string[]): GlobPattern {
   return '{' + glob.join(',') + '}';
