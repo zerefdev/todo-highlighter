@@ -38,6 +38,10 @@ export function activate(ctx: ExtensionContext) {
   workspace.onDidChangeTextDocument(() => {
     styleText(editor);
   });
+
+  workspace.onDidSaveTextDocument(() => {
+    todoTreeList.refresh();
+  });
 }
 
 function styleText(editor?: TextEditor) {
