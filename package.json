@@ -41,6 +41,11 @@
 					"default": "#f1f1f1",
 					"description": "Controls the text color."
 				},
+				"simpleTodoHighlighter.borderRadius": {
+					"type": "string",
+					"default": "4px 16px",
+					"description": "Controls the border radius."
+				},
 				"simpleTodoHighlighter.stylingColor": {
 					"type": "string",
 					"default": "#e5aa25",

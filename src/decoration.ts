@@ -5,7 +5,6 @@ export class Decoration {
   private static filesToInclude: string[];
   private static filesToExclude: string[];
   private static decorationOptions: DecorationRenderOptions = {
-    borderRadius: '4px 16px',
     rangeBehavior: DecorationRangeBehavior.ClosedClosed
   };
 
@@ -27,10 +26,12 @@ export class Decoration {
     const stylingColor = config.get<string>('stylingColor');
     const rulerLane = config.get<'Left' | 'Right' | 'Center' | 'Full'>('rulerLane');
     const rulerColor = config.get<boolean>('enableRulerColor');
+    const borderRadius = config.get<string>('borderRadius');
     const include = config.get<string[]>('include');
     const exclude = config.get<string[]>('exclude');
 
     Decoration.decorationOptions.color = textColor;
+    Decoration.decorationOptions.borderRadius = borderRadius;
     Decoration.filesToInclude = include || INCLUDE;
     Decoration.filesToExclude = exclude || EXCLUDE;
 
