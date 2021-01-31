@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.4.0] 2021-01-31
+### Added
+- Ability to change settings:
+  - border radius
+  - include/exclude folders/files
+
 ## [0.3.0] 2021-01-31
 ### Added
 - Ability to change settings:
