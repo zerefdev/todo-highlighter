@@ -46,6 +46,7 @@ export function activate(ctx: ExtensionContext) {
   workspace.onDidChangeConfiguration(async () => {
     Decoration.config(workspace.getConfiguration(EXTENSION_ID));
     styleText(editor);
+    todoTreeList.refresh();
   });
 }
 

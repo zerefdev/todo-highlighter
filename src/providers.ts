@@ -1,5 +1,6 @@
 import { EventEmitter, GlobPattern, ThemeIcon, TreeDataProvider, TreeItem, TreeItemCollapsibleState, Uri, workspace } from 'vscode';
 import { COMMANDS, EXCLUDE, INCLUDE, MAX_RESULTS, REGEX, TODO } from './constants';
+import { Decoration } from './decoration';
 
 export class TodoTreeListProvider implements TreeDataProvider<Todo> {
   private _onDidChangeTreeData = new EventEmitter<Todo | undefined | null | void>();
@@ -18,8 +19,8 @@ export class TodoTreeListProvider implements TreeDataProvider<Todo> {
   private async getTodoList(): Promise<Todo[]> {
     const arr1: Todo[] = [];
     const files = await workspace.findFiles(
-      pattern(INCLUDE),
-      pattern(EXCLUDE),
+      pattern(Decoration.include(), INCLUDE),
+      pattern(Decoration.exclude(), EXCLUDE),
       MAX_RESULTS
     );
 
@@ -88,6 +89,10 @@ class Todo extends TreeItem {
   }
 }
 
-function pattern(glob: string[]): GlobPattern {
-  return '{' + glob.join(',') + '}';
+function pattern(glob: string[], def: string[]): GlobPattern {
+  if (Array.isArray(glob) && glob.length) {
+    return '{' + glob.join(',') + '}';
+  }
+
+  return '{' + def.join(',') + '}';
 }

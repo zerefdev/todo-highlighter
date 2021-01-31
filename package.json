@@ -70,6 +70,38 @@
 					"type": "boolean",
 					"default": true,
 					"description": "Whether to enable decoration in the overview ruler."
+				},
+				"simpleTodoHighlighter.include": {
+					"type": "array",
+					"default": [
+						"**/*.js",
+						"**/*.ts",
+						"**/*.jsx",
+						"**/*.tsx",
+						"**/*.html",
+						"**/*.vue",
+						"**/*.css",
+						"**/*.scss",
+						"**/*.sass",
+						"**/*.less",
+						"**/*.styl",
+						"**/*.py",
+						"**/*.php",
+						"**/*.md"
+					],
+					"description": "Files/Folders to include."
+				},
+				"simpleTodoHighlighter.exclude": {
+					"type": "array",
+					"default": [
+						"**/node_modules/**",
+						"**/bower_components/**",
+						"**/dist/**",
+						"**/out/**",
+						"**/build/**",
+						"**/.*/**"
+					],
+					"description": "Files/Folders to exclude."
 				}
 			}
 		},
