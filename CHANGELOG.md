@@ -1,5 +1,9 @@
 # Change Log
 
+## [0.4.1] 2021-01-31
+### Changed
+- border radius setting name
+
 ## [0.4.0] 2021-01-31
 ### Added
 - Ability to change settings:
