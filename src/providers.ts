@@ -10,9 +10,7 @@ export class TodoTreeListProvider implements TreeDataProvider<Todo> {
   }
 
   async getChildren(element?: Todo): Promise<Todo[]> {
-    if (!element) {
-      return Promise.resolve(await this.getTodoList());
-    }
+    if (!element) return Promise.resolve(await this.getTodoList());
 
     return Promise.resolve(element.children ?? []);
   }

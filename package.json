@@ -33,6 +33,46 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
+		"configuration": {
+			"title": "Simple Todo Highlighter",
+			"properties": {
+				"simpleTodoHighlighter.textColor": {
+					"type": "string",
+					"default": "#f1f1f1",
+					"description": "Controls the text color."
+				},
+				"simpleTodoHighlighter.stylingColor": {
+					"type": "string",
+					"default": "#e5aa25",
+					"description": "Controls the styling color."
+				},
+				"simpleTodoHighlighter.stylingType": {
+					"type": "string",
+					"default": "background",
+					"enum": [
+						"background",
+						"border"
+					],
+					"description": "Controls the highlight styling."
+				},
+				"simpleTodoHighlighter.rulerLane": {
+					"type": "string",
+					"default": "Center",
+					"enum": [
+						"Left",
+						"Right",
+						"Center",
+						"Full"
+					],
+					"description": "The position in the overview ruler where the decoration should be rendered."
+				},
+				"simpleTodoHighlighter.enableRulerColor": {
+					"type": "boolean",
+					"default": true,
+					"description": "Whether to enable decoration in the overview ruler."
+				}
+			}
+		},
 		"commands": [
 			{
 				"command": "simpleTodoHighlighter.refreshList",

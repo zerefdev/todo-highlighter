@@ -1,3 +1,5 @@
+export const EXTENSION_ID = 'simpleTodoHighlighter';
+
 export const VIEWS = {
   TODO_LIST: 'todo-list'
 };

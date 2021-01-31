@@ -1,14 +1,14 @@
 import { commands, ExtensionContext, Position, Range, Selection, TextEditor, TextEditorRevealType, Uri, window, workspace } from 'vscode';
-import { COMMANDS, REGEX, VIEWS } from './constants';
+import { COMMANDS, EXTENSION_ID, REGEX, TODO, VIEWS } from './constants';
 import { Decoration } from './decoration';
 import { TodoTreeListProvider } from './providers';
 
 export function activate(ctx: ExtensionContext) {
-  let editor = window.activeTextEditor;
   const todoTreeList = new TodoTreeListProvider();
+  let editor = window.activeTextEditor;
 
   window.registerTreeDataProvider(VIEWS.TODO_LIST, todoTreeList);
-
+  Decoration.config(workspace.getConfiguration(EXTENSION_ID));
   styleText(editor);
 
   ctx.subscriptions.push(
@@ -42,9 +42,14 @@ export function activate(ctx: ExtensionContext) {
   workspace.onDidSaveTextDocument(() => {
     todoTreeList.refresh();
   });
+
+  workspace.onDidChangeConfiguration(async () => {
+    Decoration.config(workspace.getConfiguration(EXTENSION_ID));
+    styleText(editor);
+  });
 }
 
-function styleText(editor?: TextEditor) {
+function styleText(editor: TextEditor | undefined) {
   if (!editor) return;
   const doc = editor.document;
   const str = doc.getText();
@@ -52,8 +57,8 @@ function styleText(editor?: TextEditor) {
 
   while ((match = REGEX.exec(str))) {
     editor.setDecorations(
-      window.createTextEditorDecorationType(Decoration.decorations()),
-      [new Range(doc.positionAt(match.index), doc.positionAt(match.index + 5))]
+      window.createTextEditorDecorationType(Decoration.decoration()),
+      [new Range(doc.positionAt(match.index), doc.positionAt(match.index + TODO.length))]
     );
   }
 }
