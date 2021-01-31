@@ -1,5 +1,17 @@
 # Change Log
 
+## [0.3.0] 2021-01-31
+### Added
+- Ability to change settings:
+  - background/border
+  - background/border color
+  - text color
+  - overview ruler style and color
+
+### Changed
+  - Extension icon
+  - Border raduis
+
 ## [0.2.0] 2021-01-27
 ### Added
 - Todo list is refreshed when the document is saved
