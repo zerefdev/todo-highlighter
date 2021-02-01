@@ -1,12 +1,12 @@
-export const EXTENSION_ID = 'simpleTodoHighlighter';
+export const EXTENSION_ID = 'todoHighlighter';
 
 export const VIEWS = {
   TODO_LIST: 'todo-list'
 };
 
 export const COMMANDS = {
-  REFRESH: 'simpleTodoHighlighter.refreshList',
-  OPEN_FILE: 'simpleTodoHighlighter.openFile'
+  REFRESH: EXTENSION_ID + '.refreshList',
+  OPEN_FILE: EXTENSION_ID + '.openFile'
 };
 
 export const MAX_RESULTS = 512;

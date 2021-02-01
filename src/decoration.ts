@@ -37,6 +37,7 @@ export class Decoration {
 
     if (stylingType === 'background') {
       Decoration.decorationOptions.backgroundColor = stylingColor;
+      Decoration.decorationOptions.border = 'none';
     } else {
       Decoration.decorationOptions.border = `1px solid ${stylingColor} `;
       Decoration.decorationOptions.backgroundColor = 'transparent';

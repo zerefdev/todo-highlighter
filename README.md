@@ -1,5 +1,5 @@
-# Simple Todo Highlighter
-
+# Todo Highlighter
+A vscode extension that highlights 'todo' keyword and lists all todos in the side bar.
 
 ## Features
 - Provides a `todo` snippet for multiple programming languages
@@ -7,10 +7,18 @@
 - Lists all todos, accessible via `Activity Bar`
 
 ## Preview
-Snippet 
+Snippet + Live List Update
 
-![preview](https://i.imgur.com/a1Eau0p.gif)
+![snippet preview](https://raw.githubusercontent.com/zerefdev/todo-highlighter/main/src/media/preview/snippet.gif)
 
-Todo List
+Todo List + Easy Access
 
-![preview](https://i.imgur.com/kMJQOnT.gif)
+![list preview](https://raw.githubusercontent.com/zerefdev/todo-highlighter/main/src/media/preview/list.gif)
+
+Include/Excldude Directories
+
+![exclude preview](https://raw.githubusercontent.com/zerefdev/todo-highlighter/main/src/media/preview/exclude.gif)
+
+Customizable Styling
+
+![style preview](https://raw.githubusercontent.com/zerefdev/todo-highlighter/main/src/media/preview/style.gif)

@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.0.0] 2021-02-01
+### Changed
+- Extension name & links
+
+*this will probably be the last change until something breaks*
+
 ## [0.4.1] 2021-01-31
 ### Changed
 - border radius setting name

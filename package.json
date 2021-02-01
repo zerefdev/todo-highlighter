@@ -1,8 +1,8 @@
 {
-	"name": "simple-todo-highlighter",
-	"displayName": "Simple Todo Highlighter",
+	"name": "todo-highlighter",
+	"displayName": "Todo Highlighter",
 	"description": "Highlights TODO keyword and lists all todos in the side bar.",
-	"version": "0.4.1",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.52.0"
 	},
@@ -11,21 +11,21 @@
 	],
 	"keywords": [
 		"todo",
+		"highlight",
 		"todo snippet",
 		"todo highlight",
-		"simple todo",
-		"highlighter"
+		"todo highlighter"
 	],
 	"license": "MIT",
 	"publisher": "zerefdev",
 	"icon": "src/media/icon.png",
-	"homepage": "https://github.com/zerefdev/simple-todo-highlighter/blob/main/README.md",
+	"homepage": "https://github.com/zerefdev/todo-highlighter/blob/main/README.md",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/zerefdev/simple-todo-highlighter.git"
+		"url": "https://github.com/zerefdev/todo-highlighter.git"
 	},
 	"bugs": {
-		"url": "https://github.com/zerefdev/simple-todo-highlighter/issues",
+		"url": "https://github.com/zerefdev/todo-highlighter/issues",
 		"email": "contact@zeref.dev"
 	},
 	"activationEvents": [
@@ -34,19 +34,19 @@
 	"main": "./out/extension.js",
 	"contributes": {
 		"configuration": {
-			"title": "Simple Todo Highlighter",
+			"title": "Todo Highlighter",
 			"properties": {
-				"simpleTodoHighlighter.textColor": {
+				"todoHighlighter.textColor": {
 					"type": "string",
 					"default": "#f1f1f1",
 					"description": "Controls the text color."
 				},
-				"simpleTodoHighlighter.stylingColor": {
+				"todoHighlighter.stylingColor": {
 					"type": "string",
 					"default": "#e5aa25",
 					"description": "Controls the styling color."
 				},
-				"simpleTodoHighlighter.stylingType": {
+				"todoHighlighter.stylingType": {
 					"type": "string",
 					"default": "background",
 					"enum": [
@@ -55,12 +55,12 @@
 					],
 					"description": "Controls the highlight styling."
 				},
-				"simpleTodoHighlighter.stylingBorderRadius": {
+				"todoHighlighter.stylingBorderRadius": {
 					"type": "string",
 					"default": "4px 16px",
 					"description": "Controls the border radius."
 				},
-				"simpleTodoHighlighter.rulerLane": {
+				"todoHighlighter.rulerLane": {
 					"type": "string",
 					"default": "Center",
 					"enum": [
@@ -71,12 +71,12 @@
 					],
 					"description": "The position in the overview ruler where the decoration should be rendered."
 				},
-				"simpleTodoHighlighter.enableRulerColor": {
+				"todoHighlighter.enableRulerColor": {
 					"type": "boolean",
 					"default": true,
 					"description": "Whether to enable decoration in the overview ruler."
 				},
-				"simpleTodoHighlighter.include": {
+				"todoHighlighter.include": {
 					"type": "array",
 					"default": [
 						"**/*.js",
@@ -96,7 +96,7 @@
 					],
 					"description": "Files/Folders to include."
 				},
-				"simpleTodoHighlighter.exclude": {
+				"todoHighlighter.exclude": {
 					"type": "array",
 					"default": [
 						"**/node_modules/**",
@@ -112,14 +112,14 @@
 		},
 		"commands": [
 			{
-				"command": "simpleTodoHighlighter.refreshList",
-				"category": "Simple Todo Highlighter",
+				"command": "todoHighlighter.refreshList",
+				"category": "Todo Highlighter",
 				"title": "Refresh Todo List",
 				"icon": "$(refresh)"
 			},
 			{
-				"command": "simpleTodoHighlighter.openFile",
-				"category": "Simple Todo Highlighter",
+				"command": "todoHighlighter.openFile",
+				"category": "Todo Highlighter",
 				"title": "Open File",
 				"icon": "$(file)"
 			}
@@ -132,14 +132,14 @@
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "simpleTodoHighlighter",
-					"title": "Simple Todo Highlighter",
+					"id": "todoHighlighter",
+					"title": "Todo Highlighter",
 					"icon": "src/media/icon.svg"
 				}
 			]
 		},
 		"views": {
-			"simpleTodoHighlighter": [
+			"todoHighlighter": [
 				{
 					"id": "todo-list",
 					"name": "Todo List"
@@ -149,7 +149,7 @@
 		"menus": {
 			"view/title": [
 				{
-					"command": "simpleTodoHighlighter.refreshList",
+					"command": "todoHighlighter.refreshList",
 					"when": "view == todo-list",
 					"group": "navigation"
 				}
