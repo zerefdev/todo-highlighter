@@ -38,8 +38,11 @@ export class Decoration {
     if (stylingType === 'background') {
       Decoration.decorationOptions.backgroundColor = stylingColor;
       Decoration.decorationOptions.border = 'none';
-    } else {
+    } else if (stylingType === 'border') {
       Decoration.decorationOptions.border = `1px solid ${stylingColor} `;
+      Decoration.decorationOptions.backgroundColor = 'transparent';
+    } else {
+      Decoration.decorationOptions.border = 'none';
       Decoration.decorationOptions.backgroundColor = 'transparent';
     }
 

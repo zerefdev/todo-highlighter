@@ -51,7 +51,8 @@
 					"default": "background",
 					"enum": [
 						"background",
-						"border"
+						"border",
+						"textonly"
 					],
 					"description": "Controls the highlight styling."
 				},
