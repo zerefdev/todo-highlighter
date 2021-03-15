@@ -1,5 +1,9 @@
 # Change Log
 
+## [unreleased] yyyy-mm-dd
+### Changed
+- Ability to disable background/border (only change text color)
+
 ## [1.0.0] 2021-02-01
 ### Changed
 - Extension name & links
