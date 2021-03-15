@@ -54,8 +54,8 @@ export class TodoTreeListProvider implements TreeDataProvider<Todo> {
 
     // TODO: find a better way
     return arr1.sort(({ label: label1 }, { label: label2 }) => {
-      const l1 = label1.toLocaleLowerCase();
-      const l2 = label2.toLocaleLowerCase();
+      const l1 = label1.toLowerCase();
+      const l2 = label2.toLowerCase();
 
       if (l1 < l2) return -1;
 

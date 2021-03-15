@@ -1,6 +1,6 @@
 # Change Log
 
-## [unreleased] yyyy-mm-dd
+## [1.0.1] 2021-03-15
 ### Changed
 - Ability to disable background/border (only change text color)
 
