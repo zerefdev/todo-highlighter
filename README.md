@@ -15,7 +15,7 @@ Todo List + Easy Access
 
 ![list preview](https://raw.githubusercontent.com/zerefdev/todo-highlighter/main/src/media/preview/list.gif)
 
-Include/Excldude Directories
+Include/Exclude Directories
 
 ![exclude preview](https://raw.githubusercontent.com/zerefdev/todo-highlighter/main/src/media/preview/exclude.gif)
 
