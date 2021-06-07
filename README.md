@@ -1,11 +1,11 @@
 ## Good to know
 
-"keyword": whatever you want the extension to highlight
-"decorationType": background, border, textonly
-"primaryColor": CSS property
-"secondaryColor": CSS property (optional for textonly)
-"borderRadius": CSS property (optional)
-"borderWidth": CSS property (optional)
+"keyword": whatever you want the extension to highlight  
+"decorationType": background, border or textonly  
+"primaryColor": CSS property  
+"secondaryColor": CSS property (optional for textonly)  
+"borderRadius": CSS property (optional)  
+"borderWidth": CSS property (optional)  
 
 ## Example (see screenshot for result)
 
