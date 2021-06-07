@@ -38,4 +38,4 @@ Add this to your `settings.json` file.
 
 ## Preview
 
-[preview](https://i.imgur.com/QxkWxn5.png)
+![preview](https://i.imgur.com/QxkWxn5.png)
