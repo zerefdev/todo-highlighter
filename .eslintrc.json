@@ -5,26 +5,15 @@
         "ecmaVersion": 6,
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
+    "plugins": ["@typescript-eslint"],
     "rules": {
         "eqeqeq": "warn",
         "no-throw-literal": "warn",
-        "quotes": [
-            "error",
-            "single"
-        ],
+        "quotes": ["error", "single"],
         "semi": "warn",
-        "indent": [
-            "error",
-            2
-        ],
+        "indent": ["error", 4],
         "space-before-blocks": "error",
         "keyword-spacing": "warn",
-        "object-curly-spacing": [
-            "warn",
-            "always"
-        ]
+        "object-curly-spacing": ["warn", "always"]
     }
 }

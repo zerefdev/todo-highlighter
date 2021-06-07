@@ -1,38 +1,26 @@
 {
-  "Add Todo": {
-    "scope": "javascript, typescript, javascriptreact, typescriptreact, vue, csharp, cpp, php",
-    "prefix": "todo",
-    "body": [
-      "// TODO: $0",
-    ],
-    "description": "Add Todo"
-  },
-  "Add CSS Todo": {
-    "scope": "css, scss, sass, less, stylus",
-    "prefix": "todo",
-    "body": [
-      "/*",
-      "  TODO: $0",
-      "*/"
-    ],
-    "description": "Add Todo"
-  },
-  "Add C Todo": {
-    "scope": "c, python",
-    "prefix": "todo",
-    "body": [
-      "# TODO: $0",
-    ],
-    "description": "Add Todo"
-  },
-  "Add Html Todo": {
-    "scope": "html, markdown",
-    "prefix": "todo",
-    "body": [
-      "<!--",
-      "  TODO: $0",
-      "-->",
-    ],
-    "description": "Add Todo"
-  },
+    "Add Todo": {
+        "scope": "javascript, typescript, javascriptreact, typescriptreact, vue, csharp, cpp, php",
+        "prefix": "todo",
+        "body": ["// TODO: $0"],
+        "description": "Add Todo"
+    },
+    "Add CSS Todo": {
+        "scope": "css, scss, sass, less, stylus",
+        "prefix": "todo",
+        "body": ["/*", "  TODO: $0", "*/"],
+        "description": "Add Todo"
+    },
+    "Add C Todo": {
+        "scope": "c, python",
+        "prefix": "todo",
+        "body": ["# TODO: $0"],
+        "description": "Add Todo"
+    },
+    "Add Html Todo": {
+        "scope": "html, markdown",
+        "prefix": "todo",
+        "body": ["<!--", "  TODO: $0", "-->"],
+        "description": "Add Todo"
+    }
 }
