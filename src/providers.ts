@@ -8,8 +8,9 @@ import {
     Uri,
     workspace
 } from 'vscode';
-import { COMMANDS, EXCLUDE, INCLUDE, MAX_RESULTS, REGEX, TODO } from './constants';
+import { COMMANDS, EXCLUDE, INCLUDE, MAX_RESULTS } from './constants';
 import { Decoration } from './decoration';
+import { keywords } from './extension';
 
 export class TodoTreeListProvider implements TreeDataProvider<Todo> {
     private _onDidChangeTreeData = new EventEmitter<Todo | undefined | null | void>();
@@ -26,6 +27,7 @@ export class TodoTreeListProvider implements TreeDataProvider<Todo> {
     }
 
     private async getTodoList(): Promise<Todo[]> {
+        const regex = new RegExp(keywords.join('|'), 'g');
         const arr1: Todo[] = [];
         const files = await workspace.findFiles(
             pattern(Decoration.include(), INCLUDE),
@@ -40,16 +42,17 @@ export class TodoTreeListProvider implements TreeDataProvider<Todo> {
                 const doc = await workspace.openTextDocument(file);
                 const docUri = doc.uri;
                 const fileName = doc.fileName.replace(/\\/g, '/').split('/').pop() ?? 'unknown';
-                let k = 1;
 
                 for (let j = 0; j < doc.lineCount; j++) {
                     const text = doc.lineAt(j).text;
+                    const match = text.match(regex);
 
-                    if (REGEX.test(text)) {
-                        const todoText = text.slice(text.indexOf(TODO) + TODO.length + 1, text.length);
+                    if (match && match.length) {
+                        const keyword = match[0];
+                        const todoText = text.slice(text.indexOf(keyword), text.length);
+
                         if (todoText) {
-                            arr2.push(new Todo(`${k}. ${todoText}`, undefined, docUri, j));
-                            k++;
+                            arr2.push(new Todo(`${todoText}`, undefined, docUri, j));
                         }
                     }
                 }

@@ -1,15 +1,22 @@
-import { DecorationRangeBehavior, DecorationRenderOptions, OverviewRulerLane, WorkspaceConfiguration } from 'vscode';
+import { DecorationRenderOptions, OverviewRulerLane, WorkspaceConfiguration } from 'vscode';
 import { EXCLUDE, INCLUDE } from './constants';
+
+type keywordsSetting = {
+    keyword: string;
+    decorationType: string;
+    primaryColor: string;
+    secondaryColor: string;
+    borderWidth: string;
+    borderRadius: string;
+};
 
 export class Decoration {
     private static filesToInclude: string[];
     private static filesToExclude: string[];
-    private static decorationOptions: DecorationRenderOptions = {
-        rangeBehavior: DecorationRangeBehavior.ClosedClosed
-    };
+    private static decorationOptions: Record<string, DecorationRenderOptions> = {};
 
-    public static decoration(): DecorationRenderOptions {
-        return Decoration.decorationOptions;
+    public static decoration(keyword: string): DecorationRenderOptions {
+        return Decoration.decorationOptions[keyword];
     }
 
     public static include(): string[] {
@@ -20,37 +27,52 @@ export class Decoration {
         return Decoration.filesToExclude;
     }
 
-    public static config(config: WorkspaceConfiguration): void {
-        const textColor = config.get<string>('textColor');
-        const stylingType = config.get<string>('stylingType');
-        const stylingColor = config.get<string>('stylingColor');
-        const stylingBorderRadius = config.get<string>('stylingBorderRadius');
-        const rulerLane = config.get<'Left' | 'Right' | 'Center' | 'Full'>('rulerLane');
-        const rulerColor = config.get<boolean>('enableRulerColor');
+    public static init(config: WorkspaceConfiguration): void {
         const include = config.get<string[]>('include');
         const exclude = config.get<string[]>('exclude');
+        const keywordsSettings = config.get<keywordsSetting[]>('keywordsSettings');
+        const enableRuler = config.get<boolean>('enableRuler');
+        const rulerPosition = config.get<'Left' | 'Right' | 'Center' | 'Full'>('rulerPosition');
 
-        Decoration.decorationOptions.color = textColor;
-        Decoration.decorationOptions.borderRadius = stylingBorderRadius;
         Decoration.filesToInclude = include || INCLUDE;
         Decoration.filesToExclude = exclude || EXCLUDE;
 
-        if (stylingType === 'background') {
-            Decoration.decorationOptions.backgroundColor = stylingColor;
-            Decoration.decorationOptions.border = 'none';
-        } else if (stylingType === 'border') {
-            Decoration.decorationOptions.border = `1px solid ${stylingColor} `;
-            Decoration.decorationOptions.backgroundColor = 'transparent';
-        } else {
-            Decoration.decorationOptions.border = 'none';
-            Decoration.decorationOptions.backgroundColor = 'transparent';
-        }
+        if (!keywordsSettings || !keywordsSettings.length) return;
 
-        if (rulerColor) {
-            Decoration.decorationOptions.overviewRulerColor = stylingColor;
-            Decoration.decorationOptions.overviewRulerLane = OverviewRulerLane[rulerLane!];
-        } else {
-            Decoration.decorationOptions.overviewRulerColor = 'transparent';
+        for (let i = 0; i < keywordsSettings.length; i++) {
+            const keywordsSetting = keywordsSettings[i];
+
+            let keywordDecorations: DecorationRenderOptions = {};
+
+            keywordDecorations.color = keywordsSetting.primaryColor;
+
+            if (keywordsSetting.decorationType === 'background') {
+                keywordDecorations.backgroundColor = keywordsSetting.secondaryColor;
+                keywordDecorations.border = 'none';
+                keywordDecorations.borderRadius = keywordsSetting.borderRadius ?? '5px';
+            } else if (keywordsSetting.decorationType === 'border') {
+                keywordDecorations.backgroundColor = 'transparent';
+                keywordDecorations.borderStyle = 'solid';
+                keywordDecorations.borderColor = keywordsSetting.secondaryColor;
+                keywordDecorations.borderWidth = keywordsSetting.borderWidth ?? '1px';
+                keywordDecorations.borderRadius = keywordsSetting.borderRadius ?? '5px';
+            } else {
+                keywordDecorations.backgroundColor = 'transparent';
+                keywordDecorations.border = 'none';
+            }
+
+            if (enableRuler) {
+                keywordDecorations.overviewRulerColor = keywordsSetting.secondaryColor;
+                keywordDecorations.overviewRulerLane = OverviewRulerLane[rulerPosition ?? 'Center'];
+            } else {
+                keywordDecorations.overviewRulerColor = 'transparent';
+            }
+
+            Decoration.decorationOptions[keywordsSetting.keyword] = keywordDecorations;
         }
+    }
+
+    public static getKeywords(): string[] {
+        return Object.keys(Decoration.decorationOptions);
     }
 }

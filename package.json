@@ -1,8 +1,8 @@
 {
-    "name": "todo-highlighter",
-    "displayName": "Todo Highlighter",
+    "name": "todo-highlighter-extra",
+    "displayName": "Todo Highlighter Extra",
     "description": "Highlights TODO keyword and lists all todos in the side bar.",
-    "version": "1.0.1",
+    "version": "0.0.1",
     "engines": {
         "vscode": "^1.52.0"
     },
@@ -34,34 +34,23 @@
     "main": "./out/extension.js",
     "contributes": {
         "configuration": {
-            "title": "Todo Highlighter",
+            "title": "Todo Highlighter Extra",
             "properties": {
-                "todoHighlighter.textColor": {
-                    "type": "string",
-                    "default": "#f1f1f1",
-                    "description": "Controls the text color."
-                },
-                "todoHighlighter.stylingColor": {
-                    "type": "string",
-                    "default": "#e5aa25",
-                    "description": "Controls the styling color."
-                },
-                "todoHighlighter.stylingType": {
-                    "type": "string",
-                    "default": "background",
-                    "enum": [
-                        "background",
-                        "border",
-                        "textonly"
+                "todoHighlighterExtra.keywordsSettings": {
+                    "type": "array",
+                    "default": [
+                        {
+                            "keyword": "TODO:",
+                            "decorationType": "background",
+                            "primaryColor": "#f1f1f1",
+                            "secondaryColor": "#e5aa25",
+                            "borderWidth": "1px",
+                            "borderRadius": "5px"
+                        }
                     ],
-                    "description": "Controls the highlight styling."
+                    "description": "Keywords settings."
                 },
-                "todoHighlighter.stylingBorderRadius": {
-                    "type": "string",
-                    "default": "4px 16px",
-                    "description": "Controls the border radius."
-                },
-                "todoHighlighter.rulerLane": {
+                "todoHighlighterExtra.rulerPosition": {
                     "type": "string",
                     "default": "Center",
                     "enum": [
@@ -72,12 +61,12 @@
                     ],
                     "description": "The position in the overview ruler where the decoration should be rendered."
                 },
-                "todoHighlighter.enableRulerColor": {
+                "todoHighlighterExtra.enableRuler": {
                     "type": "boolean",
                     "default": true,
                     "description": "Whether to enable decoration in the overview ruler."
                 },
-                "todoHighlighter.include": {
+                "todoHighlighterExtra.include": {
                     "type": "array",
                     "default": [
                         "**/*.js",
@@ -97,7 +86,7 @@
                     ],
                     "description": "Files/Folders to include."
                 },
-                "todoHighlighter.exclude": {
+                "todoHighlighterExtra.exclude": {
                     "type": "array",
                     "default": [
                         "**/node_modules/**",
@@ -113,13 +102,13 @@
         },
         "commands": [
             {
-                "command": "todoHighlighter.refreshList",
+                "command": "todoHighlighterExtra.refreshList",
                 "category": "Todo Highlighter",
                 "title": "Refresh Todo List",
                 "icon": "$(refresh)"
             },
             {
-                "command": "todoHighlighter.openFile",
+                "command": "todoHighlighterExtra.openFile",
                 "category": "Todo Highlighter",
                 "title": "Open File",
                 "icon": "$(file)"
@@ -133,14 +122,14 @@
         "viewsContainers": {
             "activitybar": [
                 {
-                    "id": "todoHighlighter",
+                    "id": "todoHighlighterExtra",
                     "title": "Todo Highlighter",
                     "icon": "src/media/icon.svg"
                 }
             ]
         },
         "views": {
-            "todoHighlighter": [
+            "todoHighlighterExtra": [
                 {
                     "id": "todo-list",
                     "name": "Todo List"
@@ -150,7 +139,7 @@
         "menus": {
             "view/title": [
                 {
-                    "command": "todoHighlighter.refreshList",
+                    "command": "todoHighlighterExtra.refreshList",
                     "when": "view == todo-list",
                     "group": "navigation"
                 }

@@ -1,4 +1,4 @@
-export const EXTENSION_ID = 'todoHighlighter';
+export const EXTENSION_ID = 'todoHighlighterExtra';
 
 export const VIEWS = {
     TODO_LIST: 'todo-list'
@@ -10,10 +10,6 @@ export const COMMANDS = {
 };
 
 export const MAX_RESULTS = 512;
-
-export const TODO = 'TODO:';
-
-export const REGEX = new RegExp(/(TODO:|FIXME:|NOTE:)/, 'g');
 
 export const INCLUDE = [
     '**/*.js',

@@ -1,24 +1,41 @@
-# Todo Highlighter
-A vscode extension that highlights 'todo' keyword and lists all todos in the side bar.
+## Good to know
 
-## Features
-- Provides a `todo` snippet for multiple programming languages
-- Highlights the word `TODO`
-- Lists all todos, accessible via `Activity Bar`
+"keyword": whatever you want the extension to highlight
+"decorationType": background, border, textonly
+"primaryColor": CSS property
+"secondaryColor": CSS property (optional for textonly)
+"borderRadius": CSS property (optional)
+"borderWidth": CSS property (optional)
+
+## Example (see screenshot for result)
+
+```json
+  "todoHighlighterExtra.keywordsSettings": [
+    {
+      "keyword": "TODO:",
+      "decorationType": "background",
+      "primaryColor": "#f1f1f1",
+      "secondaryColor": "#e5aa25",
+      "borderRadius": "5px"
+    },
+    {
+      "keyword": "FIXME:",
+      "decorationType": "border",
+      "primaryColor": "#f1f1f1",
+      "secondaryColor": "#3b3bff",
+      "borderRadius": "5px",
+      "borderWidth": "1px"
+    },
+    {
+      "keyword": "NOTE:",
+      "decorationType": "textonly",
+      "primaryColor": "#e5aa25"
+    }
+  ]
+```
+
+Add this to your `settings.json` file.
 
 ## Preview
-Snippet + Live List Update
 
-![snippet preview](https://raw.githubusercontent.com/zerefdev/todo-highlighter/main/src/media/preview/snippet.gif)
-
-Todo List + Easy Access
-
-![list preview](https://raw.githubusercontent.com/zerefdev/todo-highlighter/main/src/media/preview/list.gif)
-
-Include/Excldude Directories
-
-![exclude preview](https://raw.githubusercontent.com/zerefdev/todo-highlighter/main/src/media/preview/exclude.gif)
-
-Customizable Styling
-
-![style preview](https://raw.githubusercontent.com/zerefdev/todo-highlighter/main/src/media/preview/style.gif)
+[preview](https://i.imgur.com/QxkWxn5.png)
