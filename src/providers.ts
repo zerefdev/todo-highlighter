@@ -1,68 +1,92 @@
-import { EventEmitter, GlobPattern, ThemeIcon, TreeDataProvider, TreeItem, TreeItemCollapsibleState, Uri, workspace } from 'vscode';
-import { COMMANDS, EXCLUDE, INCLUDE, MAX_RESULTS, REGEX, TODO } from './constants';
+import {
+  EventEmitter,
+  GlobPattern,
+  ThemeIcon,
+  TreeDataProvider,
+  TreeItem,
+  TreeItemCollapsibleState,
+  Uri,
+  workspace
+} from 'vscode';
+import { COMMANDS, MAX_FILE_SIZE, TODO } from './constants';
 import { Decoration } from './decoration';
 
 export class TodoTreeListProvider implements TreeDataProvider<Todo> {
   private _onDidChangeTreeData = new EventEmitter<Todo | undefined | null | void>();
   readonly onDidChangeTreeData = this._onDidChangeTreeData.event;
+  private _onDidCountTodos = new EventEmitter<number>();
+  readonly onDidCountTodos = this._onDidCountTodos.event;
 
   getTreeItem(element: Todo): TreeItem {
     return element;
   }
 
   async getChildren(element?: Todo): Promise<Todo[]> {
-    if (!element) return Promise.resolve(await this.getTodoList());
+    if (!element) return this.getTodoList();
 
-    return Promise.resolve(element.children ?? []);
+    return element.children ?? [];
   }
 
   private async getTodoList(): Promise<Todo[]> {
-    const arr1: Todo[] = [];
     const files = await workspace.findFiles(
-      pattern(Decoration.include(), INCLUDE),
-      pattern(Decoration.exclude(), EXCLUDE),
-      MAX_RESULTS
+      pattern(Decoration.include()),
+      pattern(Decoration.exclude()),
+      Decoration.maxResults()
     );
+    const decoder = new TextDecoder();
 
-    if (files.length) {
-      for (let i = 0; i < files.length; i++) {
-        const arr2: Todo[] = [];
-        const file = files[i];
-        const doc = await workspace.openTextDocument(file);
-        const docUri = doc.uri;
-        const fileName = doc.fileName
-          .replace(/\\/g, '/')
-          .split('/').pop()
-          ?? 'unknown';
+    const items = await Promise.all(
+      files.map(async (file) => {
+        let bytes: Uint8Array;
+
+        try {
+          const stat = await workspace.fs.stat(file);
+          if (stat.size > MAX_FILE_SIZE) return;
+
+          bytes = await workspace.fs.readFile(file);
+        } catch {
+          return;
+        }
+
+        // git-style binary sniff: a NUL byte in the first 8KB means binary, not text
+        if (bytes.subarray(0, 8000).includes(0)) return;
+
+        const text = decoder.decode(bytes);
+
+        if (!text.includes(TODO)) return;
+
+        const todos: Todo[] = [];
+        const lines = text.split('\n');
         let k = 1;
 
-        for (let j = 0; j < doc.lineCount; j++) {
-          const text = doc.lineAt(j).text;
+        for (let j = 0; j < lines.length; j++) {
+          const index = lines[j].indexOf(TODO);
+          if (index === -1) continue;
 
-          if (REGEX.test(text)) {
-            const todoText = text.slice(text.indexOf(TODO) + TODO.length + 1, text.length);
-            if (todoText) {
-              arr2.push(new Todo(`${k}. ${todoText}`, undefined, docUri, j));
-              k++;
-            }
+          const todoText = lines[j].slice(index + TODO.length).trim();
+          if (todoText) {
+            todos.push(new Todo(`${k}. ${todoText}`, undefined, file, j));
+            k++;
           }
         }
 
-        if (arr2.length) arr1.push(new Todo(fileName, arr2, docUri));
-      }
-    }
+        if (!todos.length) return;
 
-    // TODO: find a better way
-    return arr1.sort(({ label: label1 }, { label: label2 }) => {
-      const l1 = label1.toLowerCase();
-      const l2 = label2.toLowerCase();
+        const fileName = file.path.split('/').pop() ?? 'unknown';
 
-      if (l1 < l2) return -1;
+        return new Todo(fileName, todos, file);
+      })
+    );
 
-      if (l1 > l2) return 1;
+    const list = items.filter((item): item is Todo => !!item);
 
-      return 0;
-    });
+    this._onDidCountTodos.fire(
+      list.reduce((total, { children }) => total + (children?.length ?? 0), 0)
+    );
+
+    return list.sort(({ label: label1 }, { label: label2 }) =>
+      label1.toLowerCase().localeCompare(label2.toLowerCase())
+    );
   }
 
   refresh(): void {
@@ -78,21 +102,23 @@ class Todo extends TreeItem {
     super(label, children ? TreeItemCollapsibleState.Expanded : TreeItemCollapsibleState.None);
     this.label = label;
     this.children = children;
-    this.iconPath = children ? new ThemeIcon('file') : undefined;
-    this.resourceUri = children ? path : undefined;
-    this.description = !!children;
-    this.command = !children ? {
-      command: COMMANDS.OPEN_FILE,
-      title: 'Open file',
-      arguments: [path, col]
-    } : undefined;
+
+    if (children) {
+      const dir = path ? workspace.asRelativePath(path).split('/').slice(0, -1).join('/') : '';
+
+      this.resourceUri = path;
+      this.iconPath = ThemeIcon.File;
+      this.description = dir ? `${dir} · ${children.length}` : `${children.length}`;
+    } else {
+      this.command = {
+        command: COMMANDS.OPEN_FILE,
+        title: 'Open file',
+        arguments: [path, col]
+      };
+    }
   }
 }
 
-function pattern(glob: string[], def: string[]): GlobPattern {
-  if (Array.isArray(glob) && glob.length) {
-    return '{' + glob.join(',') + '}';
-  }
-
-  return '{' + def.join(',') + '}';
+function pattern(glob: string[]): GlobPattern {
+  return '{' + glob.join(',') + '}';
 }

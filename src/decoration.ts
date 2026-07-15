@@ -1,9 +1,14 @@
-import { DecorationRangeBehavior, DecorationRenderOptions, OverviewRulerLane, WorkspaceConfiguration } from 'vscode';
-import { EXCLUDE, INCLUDE } from './constants';
+import {
+  DecorationRangeBehavior,
+  DecorationRenderOptions,
+  OverviewRulerLane,
+  WorkspaceConfiguration
+} from 'vscode';
 
 export class Decoration {
   private static filesToInclude: string[];
   private static filesToExclude: string[];
+  private static resultsLimit: number;
   private static decorationOptions: DecorationRenderOptions = {
     rangeBehavior: DecorationRangeBehavior.ClosedClosed
   };
@@ -20,6 +25,10 @@ export class Decoration {
     return Decoration.filesToExclude;
   }
 
+  public static maxResults(): number {
+    return Decoration.resultsLimit;
+  }
+
   public static config(config: WorkspaceConfiguration): void {
     const textColor = config.get<string>('textColor');
     const stylingType = config.get<string>('stylingType');
@@ -27,13 +36,15 @@ export class Decoration {
     const stylingBorderRadius = config.get<string>('stylingBorderRadius');
     const rulerLane = config.get<'Left' | 'Right' | 'Center' | 'Full'>('rulerLane');
     const rulerColor = config.get<boolean>('enableRulerColor');
-    const include = config.get<string[]>('include');
-    const exclude = config.get<string[]>('exclude');
+    const include = config.get<string[]>('include', []);
+    const exclude = config.get<string[]>('exclude', []);
+    const maxResults = config.get<number>('maxResults', 512);
 
     Decoration.decorationOptions.color = textColor;
     Decoration.decorationOptions.borderRadius = stylingBorderRadius;
-    Decoration.filesToInclude = include || INCLUDE;
-    Decoration.filesToExclude = exclude || EXCLUDE;
+    Decoration.filesToInclude = include;
+    Decoration.filesToExclude = exclude;
+    Decoration.resultsLimit = maxResults;
 
     if (stylingType === 'background') {
       Decoration.decorationOptions.backgroundColor = stylingColor;
@@ -53,4 +64,4 @@ export class Decoration {
       Decoration.decorationOptions.overviewRulerColor = 'transparent';
     }
   }
-};
+}

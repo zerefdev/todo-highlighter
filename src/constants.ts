@@ -9,34 +9,6 @@ export const COMMANDS = {
   OPEN_FILE: EXTENSION_ID + '.openFile'
 };
 
-export const MAX_RESULTS = 512;
-
 export const TODO = 'TODO:';
 
-export const REGEX = new RegExp(TODO, 'g');
-
-export const INCLUDE = [
-  '**/*.js',
-  '**/*.ts',
-  '**/*.jsx',
-  '**/*.tsx',
-  '**/*.html',
-  '**/*.vue',
-  '**/*.css',
-  '**/*.scss',
-  '**/*.sass',
-  '**/*.less',
-  '**/*.styl',
-  '**/*.py',
-  '**/*.php',
-  '**/*.md'
-];
-
-export const EXCLUDE = [
-  '**/node_modules/**',
-  '**/bower_components/**',
-  '**/dist/**',
-  '**/out/**',
-  '**/build/**',
-  '**/.*/**'
-];
+export const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
