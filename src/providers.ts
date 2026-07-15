@@ -94,7 +94,7 @@ export class TodoTreeListProvider implements TreeDataProvider<Todo> {
   }
 }
 
-class Todo extends TreeItem {
+export class Todo extends TreeItem {
   label: string;
   children: Todo[] | undefined;
 

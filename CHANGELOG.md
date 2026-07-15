@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.0.1] 2026-07-15
+
+### Fixed
+
+- Todo count badge now properly appears on startup
+
 ## [2.0.0] 2026-07-15
 
 ### Added

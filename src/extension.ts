@@ -7,13 +7,14 @@ import {
   TextEditor,
   TextEditorDecorationType,
   TextEditorRevealType,
+  TreeView,
   Uri,
   window,
   workspace
 } from 'vscode';
 import { COMMANDS, EXTENSION_ID, TODO, VIEWS } from './constants';
 import { Decoration } from './decoration';
-import { TodoTreeListProvider } from './providers';
+import { Todo, TodoTreeListProvider } from './providers';
 
 export function activate(ctx: ExtensionContext) {
   const todoTreeList = new TodoTreeListProvider();
@@ -35,6 +36,8 @@ export function activate(ctx: ExtensionContext) {
     null,
     ctx.subscriptions
   );
+
+  refreshBadge(todoView, todoTreeList);
 
   ctx.subscriptions.push(
     todoView,
@@ -74,6 +77,7 @@ export function activate(ctx: ExtensionContext) {
   workspace.onDidSaveTextDocument(
     () => {
       todoTreeList.refresh();
+      refreshBadge(todoView, todoTreeList);
     },
     null,
     ctx.subscriptions
@@ -88,6 +92,7 @@ export function activate(ctx: ExtensionContext) {
       decorationType = window.createTextEditorDecorationType(Decoration.decoration());
       window.visibleTextEditors.forEach((editor) => styleText(editor, decorationType));
       todoTreeList.refresh();
+      refreshBadge(todoView, todoTreeList);
     },
     null,
     ctx.subscriptions
@@ -107,4 +112,8 @@ function styleText(editor: TextEditor | undefined, decorationType: TextEditorDec
   }
 
   editor.setDecorations(decorationType, ranges);
+}
+
+function refreshBadge(view: TreeView<Todo>, provider: TodoTreeListProvider) {
+  if (!view.visible) provider.getChildren();
 }
