@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.0.2] 2026-07-18
+
+### Changed
+
+- New activity bar and marketplace icons
+
 ## [2.0.1] 2026-07-15
 
 ### Fixed

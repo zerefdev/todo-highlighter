@@ -1,8 +1,8 @@
 {
   "name": "todo-highlighter",
   "displayName": "Todo Highlighter",
-  "description": "Highlights TODO keyword and lists all todos in the side bar.",
-  "version": "2.0.1",
+  "description": "Fast, lightweight extension that highlights the TODO keyword and lists all todos in the sidebar.",
+  "version": "2.0.2",
   "engines": {
     "vscode": "^1.125.0"
   },

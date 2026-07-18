@@ -1,1 +1,9 @@
-<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M3.75 4.48h-.71L2 3.43l.71-.7.69.68L4.81 2l.71.71-1.77 1.77zM6.99 3h8v1h-8V3zm0 3h8v1h-8V6zm8 3h-8v1h8V9zm-8 3h8v1h-8v-1zM3.04 7.48h.71l1.77-1.77-.71-.7L3.4 6.42l-.69-.69-.71.71 1.04 1.04zm.71 3.01h-.71L2 9.45l.71-.71.69.69 1.41-1.42.71.71-1.77 1.77zm-.71 3.01h.71l1.77-1.77-.71-.71-1.41 1.42-.69-.69-.71.7 1.04 1.05z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+  <rect x="3" y="4.4" width="10" height="1.8" rx="0.9" />
+  <rect x="3" y="8.4" width="12.5" height="1.8" rx="0.9" />
+  <rect x="3" y="12.4" width="8" height="1.8" rx="0.9" />
+  <rect x="3" y="16.4" width="11.5" height="1.8" rx="0.9" />
+  <rect x="19.6" y="4.4" width="1.2" height="15.8" rx="0.6" opacity="0.45" />
+  <rect x="18.1" y="7.6" width="4.2" height="3" rx="1.2" />
+  <rect x="18.1" y="14.8" width="4.2" height="3" rx="1.2" />
+</svg>
